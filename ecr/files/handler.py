@@ -22,8 +22,7 @@ def run(event, context):
         repositories = []
 
     if not repositories:
-        try: 
-
+        try:
             scan_on_push = bool(os.environ["REPO_SCAN_ON_PUSH"])
             mutability   = os.environ["IMAGE_TAG_MUTABILITY"]
 
@@ -31,6 +30,8 @@ def run(event, context):
                  tags = [{"Key": k, "Value": v} for (k, v) in json.loads(os.environ["REPO_TAGS"]).items()]
         except Exception as e:
             logger.error("env variable malformed: %s", e)
+            sys.exit(1)
+
         try:
             client.create_repository(
                 registryId=account_id,
