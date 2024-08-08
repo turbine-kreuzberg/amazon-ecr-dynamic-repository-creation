@@ -11,6 +11,12 @@ def run(event, context):
     account_id = event["account"]
     repository = event["detail"]["requestParameters"]["repositoryName"]
 
+    filter_by_prefix  = os.environ["FILTER_BY_PREFIX"]
+
+    if not repository.startswith(filter_by_prefix):
+        logger.info("the repository %s is out of scope prefix (%s)", repository, filter_by_prefix)
+        sys.exit(0)
+
     client = boto3.client("ecr")
 
     try:

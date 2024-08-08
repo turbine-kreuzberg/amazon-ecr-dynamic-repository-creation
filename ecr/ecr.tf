@@ -15,6 +15,7 @@ resource "aws_lambda_function" "this" {
       IMAGE_TAG_MUTABILITY = var.IMAGE_TAG_MUTABILITY
       REPO_TAGS            = jsonencode(local.repo_tags)
       REPO_SCAN_ON_PUSH    = tostring(var.REPO_SCAN_ON_PUSH)
+      FILTER_BY_PREFIX     = tostring(var.FILTER_BY_PREFIX)
     }
   }
 

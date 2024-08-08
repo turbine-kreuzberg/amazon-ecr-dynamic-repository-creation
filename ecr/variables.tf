@@ -26,3 +26,9 @@ variable "REPO_SCAN_ON_PUSH" {
   description = "Toggles Scan on push on repos Lambda creates."
   default     = true
 }
+
+variable "FILTER_BY_PREFIX" {
+  type        = string
+  description = "Only create repos starting with this prefix."
+  default     = ""
+}
