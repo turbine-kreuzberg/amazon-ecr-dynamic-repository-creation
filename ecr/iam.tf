@@ -47,14 +47,14 @@ data "aws_iam_policy_document" "assume" {
 }
 
 resource "aws_iam_role" "this" {
-  name               = "dynamic-create-ecr-repo-lambda-role-${local.current_region}"
+  name               = "dynamic-create-ecr-repo-lambda-role-${local.current_region}${local.name_suffix}"
   description        = "Role for ecr repo create lambda."
   assume_role_policy = data.aws_iam_policy_document.assume.json
   tags               = merge({ Name = local.full_name }, local.common_tags)
 }
 
 resource "aws_iam_role_policy" "this" {
-  name_prefix = "dynamic-create-ecr-repo-lambda-policy-${local.current_region}"
+  name_prefix = "dynamic-create-ecr-repo-lambda-policy-${local.current_region}${local.name_suffix}"
   policy      = data.aws_iam_policy_document.access.json
   role        = aws_iam_role.this.id
 }

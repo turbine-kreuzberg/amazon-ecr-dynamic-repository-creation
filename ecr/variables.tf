@@ -32,3 +32,8 @@ variable "FILTER_BY_PREFIX" {
   description = "Only create repos starting with this prefix."
   default     = ""
 }
+variable "NAME_SUFFIX" {
+  type        = string
+  description = "Suffix added to names to enforce unique identifiers."
+  default     = ""
+}
