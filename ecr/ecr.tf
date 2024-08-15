@@ -48,7 +48,7 @@ resource "aws_cloudwatch_log_group" "this" {
 
 resource "aws_cloudwatch_event_rule" "this" {
 
-  name          = "cw-event-rule-for-non-existent-repo-${local.current_region}${local.name_suffix}"
+  name          = "non-existent-repo-${local.current_region}${local.name_suffix}"
   description   = "monitor event for RepositoryNotFoundException error"
   event_pattern = <<-EOF
   {
