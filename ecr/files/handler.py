@@ -7,6 +7,37 @@ import json
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
 
+
+lifecycle_policy = {
+    "rules": [
+        {
+            "rulePriority": 1,
+            "description": "Retain most recent 30 images",
+            "selection": {
+                "tagStatus": "any",
+                "countType": "imageCountMoreThan",
+                "countNumber": 30
+            },
+            "action": {
+                "type": "retain"
+            }
+        },
+        {
+            "rulePriority": 2,
+            "description": "Delete images older than 30 days",
+            "selection": {
+                "tagStatus": "any",
+                "countType": "sinceImagePushed",
+                "countUnit": "days",
+                "countNumber": 30
+            },
+            "action": {
+                "type": "expire"
+            }
+        }
+    ]
+}
+
 def run(event, context):
     account_id = event["account"]
     repository = event["detail"]["requestParameters"]["repositoryName"]
@@ -48,6 +79,12 @@ def run(event, context):
                 tags=tags,
             )
             logger.info("created %s repository", repository)
+
+            client.put_lifecycle_policy(
+                repositoryName=repository,
+                lifecyclePolicyText=json.dumps(lifecycle_policy)
+            )
+            logger.info("created lifecycle policy for %s", repository)
         except Exception as e:
             logger.error("failed to create repository %s: %s", repository, e)
             sys.exit(1)
