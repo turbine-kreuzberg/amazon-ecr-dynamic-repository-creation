@@ -15,7 +15,7 @@ lifecycle_policy = {
     "rules": [
         {
             "rulePriority": 1,
-            "description": "Delete images older than 30 days",
+            "description": f"Delete images older than {maximum_age_days} days",
             "selection": {
                 "tagStatus": "any",
                 "countType": "sinceImagePushed",
