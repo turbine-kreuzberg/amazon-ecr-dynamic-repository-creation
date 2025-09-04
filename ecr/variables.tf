@@ -33,12 +33,6 @@ variable "FILTER_BY_PREFIX" {
   default     = ""
 }
 
-variable "LIFECYCLE_MINIMUM_IMAGE_COUNT" {
-  type        = number
-  description = "Minimum number of images to retain in the repository."
-  default     = 30
-}
-
 variable "LIFECYCLE_MAXIMUM_AGE_DAYS" {
   type        = number
   description = "Maximum age of images to retain in the repository, in days."

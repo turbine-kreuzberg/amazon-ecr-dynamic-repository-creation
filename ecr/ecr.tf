@@ -16,7 +16,6 @@ resource "aws_lambda_function" "this" {
       REPO_TAGS                     = jsonencode(local.repo_tags)
       REPO_SCAN_ON_PUSH             = tostring(var.REPO_SCAN_ON_PUSH)
       FILTER_BY_PREFIX              = tostring(var.FILTER_BY_PREFIX)
-      LIFECYCLE_MINIMUM_IMAGE_COUNT = tostring(var.LIFECYCLE_MINIMUM_IMAGE_COUNT)
       LIFECYCLE_MAXIMUM_AGE_DAYS    = tostring(var.LIFECYCLE_MAXIMUM_AGE_DAYS)
       LIFECYCLE_POLICY_ENABLED      = tostring(var.LIFECYCLE_POLICY_ENABLED)
     }
