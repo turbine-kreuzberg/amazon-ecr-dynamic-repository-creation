@@ -45,6 +45,12 @@ variable "LIFECYCLE_MAXIMUM_AGE_DAYS" {
   default     = 90  
 }
 
+variable "LIFECYCLE_POLICY_ENABLED" {
+  type        = bool
+  description = "Whether to apply a lifecycle policy to the repository."
+  default     = true
+}
+
 variable "name" {
   type        = string
   description = "Suffix added to names to enforce unique identifiers."

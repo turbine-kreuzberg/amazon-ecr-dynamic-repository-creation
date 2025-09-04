@@ -18,6 +18,7 @@ resource "aws_lambda_function" "this" {
       FILTER_BY_PREFIX              = tostring(var.FILTER_BY_PREFIX)
       LIFECYCLE_MINIMUM_IMAGE_COUNT = tostring(var.LIFECYCLE_MINIMUM_IMAGE_COUNT)
       LIFECYCLE_MAXIMUM_AGE_DAYS    = tostring(var.LIFECYCLE_MAXIMUM_AGE_DAYS)
+      LIFECYCLE_POLICY_ENABLED      = tostring(var.LIFECYCLE_POLICY_ENABLED)
     }
   }
 

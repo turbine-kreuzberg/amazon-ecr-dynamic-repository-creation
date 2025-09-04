@@ -10,6 +10,7 @@ logger.setLevel(logging.INFO)
 
 minimum_image_count = int(os.environ["LIFECYCLE_MINIMUM_IMAGE_COUNT"])
 maximum_age_days = int(os.environ["LIFECYCLE_MAXIMUM_AGE_DAYS"])
+lifecycle_policy_enabled = os.environ["LIFECYCLE_POLICY_ENABLED"].lower() == "true"
 
 lifecycle_policy = {
     "rules": [
@@ -83,11 +84,13 @@ def run(event, context):
             )
             logger.info("created %s repository", repository)
 
-            client.put_lifecycle_policy(
-                repositoryName=repository,
-                lifecyclePolicyText=json.dumps(lifecycle_policy)
-            )
-            logger.info("created lifecycle policy for %s", repository)
+            if lifecycle_policy_enabled:
+                client.put_lifecycle_policy(
+                    repositoryName=repository,
+                    lifecyclePolicyText=json.dumps(lifecycle_policy)
+                )
+                logger.info("created lifecycle policy for %s", repository)
+
         except Exception as e:
             logger.error("failed to create repository %s: %s", repository, e)
             sys.exit(1)
