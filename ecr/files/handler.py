@@ -8,6 +8,9 @@ logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
 
 
+minimum_image_count = int(os.environ["LIFECYCLE_MINIMUM_IMAGE_COUNT"])
+maximum_age_days = int(os.environ["LIFECYCLE_MAXIMUM_AGE_DAYS"])
+
 lifecycle_policy = {
     "rules": [
         {
@@ -16,7 +19,7 @@ lifecycle_policy = {
             "selection": {
                 "tagStatus": "any",
                 "countType": "imageCountMoreThan",
-                "countNumber": 30
+                "countNumber": minimum_image_count
             },
             "action": {
                 "type": "retain"
@@ -29,7 +32,7 @@ lifecycle_policy = {
                 "tagStatus": "any",
                 "countType": "sinceImagePushed",
                 "countUnit": "days",
-                "countNumber": 30
+                "countNumber": maximum_age_days
             },
             "action": {
                 "type": "expire"

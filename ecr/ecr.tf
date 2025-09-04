@@ -12,10 +12,12 @@ resource "aws_lambda_function" "this" {
 
   environment {
     variables = {
-      IMAGE_TAG_MUTABILITY = var.IMAGE_TAG_MUTABILITY
-      REPO_TAGS            = jsonencode(local.repo_tags)
-      REPO_SCAN_ON_PUSH    = tostring(var.REPO_SCAN_ON_PUSH)
-      FILTER_BY_PREFIX     = tostring(var.FILTER_BY_PREFIX)
+      IMAGE_TAG_MUTABILITY          = var.IMAGE_TAG_MUTABILITY
+      REPO_TAGS                     = jsonencode(local.repo_tags)
+      REPO_SCAN_ON_PUSH             = tostring(var.REPO_SCAN_ON_PUSH)
+      FILTER_BY_PREFIX              = tostring(var.FILTER_BY_PREFIX)
+      LIFECYCLE_MINIMUM_IMAGE_COUNT = tostring(var.LIFECYCLE_MINIMUM_IMAGE_COUNT)
+      LIFECYCLE_MAXIMUM_AGE_DAYS    = tostring(var.LIFECYCLE_MAXIMUM_AGE_DAYS)
     }
   }
 
